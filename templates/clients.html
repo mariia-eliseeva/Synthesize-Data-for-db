@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Клиенты</title>
+</head>
+<body>
+    <h1>Клиенты</h1>
+    <table border="1">
+        <tr>
+            <th>Номер счета</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Дата рождения</th>
+            <th>ИНН</th>
+            <th>Статус</th>
+            <th>Изменить статус</th>
+        </tr>
+        {% for client in clients %}
+        <tr>
+            <td>{{ client.account_number }}</td>
+            <td>{{ client.last_name }}</td>
+            <td>{{ client.first_name }}</td>
+            <td>{{ client.patronymic }}</td>
+            <td>{{ client.birth_date }}</td>
+            <td>{{ client.inn }}</td>
+            <td>{{ client.status }}</td>
+            <td>
+                <form method="post" action="{{ url_for('update_status', id=client.id) }}">
+                    <select name="status">
+                        <option value="Не в работе">Не в работе</option>
+                        <option value="В работе">В работе</option>
+                        <option value="Отказ">Отказ</option>
+                        <option value="Сделка закрыта">Сделка закрыта</option>
+                    </select>
+                    <button type="submit">Обновить</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
